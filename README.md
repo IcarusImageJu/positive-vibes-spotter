@@ -4,6 +4,8 @@
 
 Positive-Vibes-Spotter is a script designed for my cyberdeck that captures photos of different places and generates positive descriptions about them. The aim is to create uplifting messages that help people feel loved and appreciated when they read them on the cyberdeck. Whether it’s a bustling cityscape or a quiet corner of nature, Positive-Mood-Teller finds the beauty in every scene and shares it with a smile.
 
+[](/doc/spot.mp4)
+
 ## Features:
 
   - Captures photos automatically at regular intervals.
