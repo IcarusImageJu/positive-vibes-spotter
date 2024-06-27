@@ -12,20 +12,36 @@ Positive-Vibes-Spotter is a script designed for my cyberdeck that captures photo
 
 ## Usage:
 
-  1. Install the script on your cyberdeck.
-  2. Configure the capture settings to define the frequency of photo captures.
+  1. Copy the `spot.sh` file to your cyberdeck.
+  2. create a cron job to run the script at regular intervals.
   3. Let the script run and enjoy the positive messages generated from the places around you.
+
+## CRON JOB EXAMPLE:
+
+To automate the execution of the script, you need to set up a cron job on your cyberdeck and ensure that the OPENAI_API_KEY environment variable is correctly set. Below is an example of how to do this:
+
+  1. Open the crontab editor by typing `crontab -e` in your terminal.
+  2. Add the following lines to schedule the script:
+
+```
+@reboot OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script once at reboot with the API key
+0 7-22 * * * OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script every hour from 7 AM to 10 PM with the API key
+```
+
+## OpenAI API Key:
+
+The script requires an OpenAI API key to generate the positive descriptions. You can obtain your API key by signing up on the OpenAI platform and generating a key from your account settings. Ensure to keep your API key secure and do not share it publicly.
 
 ## Tech Stack:
 
   - BASH
-  - OPENAI API KEY
+  - Debian
 
 ## Future Enhancements:
 
-  - Adding more sophisticated image analysis for better descriptions.
   - Add Ollama support for local use only
   - Customizable message templates.
+  - Upgrade UI Rendering
 
 ## Contributing:
 
