@@ -4,7 +4,11 @@
 
 Positive-Vibes-Spotter is a script designed for my cyberdeck that captures photos of different places and generates positive descriptions about them. The aim is to create uplifting messages that help people feel loved and appreciated when they read them on the cyberdeck. Whether it’s a bustling cityscape or a quiet corner of nature, Positive-Mood-Teller finds the beauty in every scene and shares it with a smile.
 
-/doc/spot.mp4
+
+
+https://github.com/IcarusImageJu/positive-vibes-spotter/assets/10758538/e0a1d509-8433-48d7-a4c3-f81f5c97252c
+
+
 
 ## Features:
 
