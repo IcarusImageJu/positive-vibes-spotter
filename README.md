@@ -15,6 +15,7 @@ https://github.com/IcarusImageJu/positive-vibes-spotter/assets/10758538/e0a1d509
   - Captures photos automatically at regular intervals.
   - Analyzes the captured images to generate positive and encouraging descriptions.
   - Displays the messages on the cyberdeck to spread positivity and good vibes.
+  - Support french only for now
 
 ## Usage:
 
@@ -48,6 +49,7 @@ The script requires an OpenAI API key to generate the positive descriptions. You
   - Add Ollama support for local use only
   - Customizable message templates.
   - Upgrade UI Rendering
+  - Add multilingual support
 
 ## Contributing:
 
