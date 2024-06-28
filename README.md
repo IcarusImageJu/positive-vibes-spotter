@@ -20,8 +20,9 @@ https://github.com/IcarusImageJu/positive-vibes-spotter/assets/10758538/e0a1d509
 ## Usage:
 
   1. Copy the `spot.sh` file to your cyberdeck.
-  2. create a cron job to run the script at regular intervals.
-  3. Let the script run and enjoy the positive messages generated from the places around you.
+  2. Create a `.env` file in the same directory as `spot.sh` and add your OpenAI API key.
+  3. create a cron job to run the script at regular intervals.
+  4. Let the script run and enjoy the positive messages generated from the places around you.
 
 ## CRON JOB EXAMPLE:
 
@@ -31,8 +32,8 @@ To automate the execution of the script, you need to set up a cron job on your c
   2. Add the following lines to schedule the script:
 
 ```
-@reboot export OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script once at reboot with the API key
-0 7-22 * * * export OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script every hour from 7 AM to 10 PM with the API key
+@reboot ~/spot.sh  # Runs the script once at reboot with the API key
+0 7-22 * * * ~/spot.sh  # Runs the script every hour from 7 AM to 10 PM with the API key
 ```
 
 ## OpenAI API Key:
