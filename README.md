@@ -31,8 +31,8 @@ To automate the execution of the script, you need to set up a cron job on your c
   2. Add the following lines to schedule the script:
 
 ```
-@reboot OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script once at reboot with the API key
-0 7-22 * * * OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script every hour from 7 AM to 10 PM with the API key
+@reboot export OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script once at reboot with the API key
+0 7-22 * * * export OPENAI_API_KEY="votre_clé_api" ~/spot.sh  # Runs the script every hour from 7 AM to 10 PM with the API key
 ```
 
 ## OpenAI API Key:

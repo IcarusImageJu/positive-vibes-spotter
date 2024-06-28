@@ -9,7 +9,7 @@ LOG_FILE="$LOG_DIR/script_$(date +'%Y-%m-%d_%H-%M-%S').log"
     echo "Début de l'exécution du script à $(date)"
 
     # Vérifie si imagemagick, jq, fim et libcamera-jpeg sont installés
-    for cmd in convert jq fim libcamera-jpeg; do
+    for cmd in convert jq fim libcamera-jpeg tee; do
         if ! command -v $cmd &> /dev/null; then
             echo "$cmd n'est pas installé. Installation..."
             sudo apt-get install $cmd -y
@@ -23,9 +23,6 @@ LOG_FILE="$LOG_DIR/script_$(date +'%Y-%m-%d_%H-%M-%S').log"
         sudo fc-cache -f -v
     fi
 
-    # Prendre une photo
-    libcamera-jpeg -o photo.jpg --rotation 180
-
     # Définir les variables
     API_KEY="${OPENAI_API_KEY}" # Utilise la variable d'environnement
     if [ -z "$API_KEY" ]; then
@@ -37,6 +34,8 @@ LOG_FILE="$LOG_DIR/script_$(date +'%Y-%m-%d_%H-%M-%S').log"
     DATE=$(date +"%d %B %Y")
     TIME=$(date +"%Hh%M")
 
+    # Prendre une photo
+    libcamera-jpeg -o photo.jpg --rotation 180
     # Encoder l'image en base64 et stocker dans une variable
     IMAGE_BASE64=$(base64 -w 0 $IMAGE_PATH)
 
@@ -98,4 +97,4 @@ EOF
     fim -a --quiet output.png
 
     echo "Fin de l'exécution du script à $(date)"
-} | sudo tee -a $LOG_FILE > /dev/null
+} 2>&1 | sudo tee -a $LOG_FILE
