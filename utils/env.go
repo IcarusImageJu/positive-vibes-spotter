@@ -13,7 +13,7 @@ func LoadEnv(filePath string) error {
 		return err
 	}
 	defer file.Close()
-
+	
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -21,11 +21,11 @@ func LoadEnv(filePath string) error {
 			parts := strings.SplitN(line, "=", 2)
 			if len(parts) == 2 {
 				os.Setenv(parts[0], parts[1])
-                logger.Info("Env variable loaded: ", parts[0])
+				logger.Info("Env variable loaded: ", parts[0])
 			}
 		}
 	}
-
+	
 	if err := scanner.Err(); err != nil {
 		return err
 	}
