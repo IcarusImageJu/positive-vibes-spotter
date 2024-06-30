@@ -32,6 +32,11 @@ if ! fc-list | grep -qi "Arial"; then
     sudo fc-cache -f -v | sudo tee -a $LOG_FILE
 fi
 
+# Charger les variables d'environnement depuis le fichier .env
+if [ -f .env ]; then
+    export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
+fi
+
 # Définir les variables
 API_KEY="${OPENAI_API_KEY}" # Utilise la variable d'environnement
 if [ -z "$API_KEY" ]; then
