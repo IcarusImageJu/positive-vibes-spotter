@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 	logger "positive-vibes-spotter/log"
+	"positive-vibes-spotter/utils"
 )
 
 // CreateImageWithCaption creates an image with the specified caption and saves it to the output path.
@@ -30,11 +31,23 @@ func CreateImageWithCaption(caption string, outputPath string) {
 	}
 }
 
-// DisplayImage displays the image at the specified output path.
-func DisplayImage(outputPath string) {
-	logger.Info("Affichage de l’image")
 
+// DisplayImageWithNoise displays the image at the specified output path and adds noise at intervals to prevent pixel burn-in.
+func DisplayImageWithNoise(outputPath string) {
+	logger.Info("Affichage de l’image")
 	
 	cmd := exec.Command("fim", "-a", "--quiet", outputPath)
-	cmd.Run()
+	err := cmd.Start()
+	if err != nil {
+		logger.Fatal(err)
+	}
+	
+}
+
+func Render(caption string, base64image string, outputPath string) {
+	utils.CheckInstall("fim", "fim")
+	utils.CheckInstall("convert", "imagemagick")
+	utils.CheckAndInstallFonts()
+	CreateImageWithCaption(caption, outputPath)
+	DisplayImageWithNoise(outputPath)
 }

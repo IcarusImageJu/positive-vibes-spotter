@@ -2,8 +2,10 @@ package caption
 
 import (
 	"fmt"
+	logger "positive-vibes-spotter/log"
 	"time"
 
+	"github.com/go-resty/resty/v2"
 	"github.com/tidwall/gjson"
 )
 
@@ -58,4 +60,22 @@ func CreatePayload(content string, imageBase64 string, model string) Payload {
 
 func ExtractCaption(responseBody []byte) string {
     return gjson.Get(string(responseBody), "choices.0.message.content").String()
+}
+
+func Caption(imageBase64 string, model string, apiKey string) string {
+    content := CreateContent()
+    requestPayload := CreatePayload(content, imageBase64, model)
+    logger.Info("Envoi de la requête à l'API OpenAI")
+    
+    client := resty.New()
+	resp, err := client.R().
+		SetHeader("Content-Type", "application/json").
+		SetHeader("Authorization", "Bearer "+apiKey).
+		SetBody(requestPayload).
+		Post("https://api.openai.com/v1/chat/completions")
+	if err != nil {
+		logger.Fatal("Erreur lors de l'envoi de la requête: ", err)
+	}
+
+    return ExtractCaption(resp.Body())
 }
