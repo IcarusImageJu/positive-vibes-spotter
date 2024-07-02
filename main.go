@@ -17,8 +17,8 @@ var (
 	apiKey    = utils.GetEnv("OPENAI_API_KEY")
 	model     = "gpt-4o"
 	imagePath = "photo.jpg"
-	outputPath = "output.png"
 	tickerTime	= 1 * time.Hour
+	debug     = true
 )
 
 func init() {
@@ -49,6 +49,14 @@ func init() {
 }
 
 func main() {
+	// Setup defer to handle any panics and log the script end time
+	defer func() {
+		if r := recover(); r != nil {
+			logger.Error("Une erreur inattendue s'est produite: ", r)
+		}
+		logger.Info("Fin de l'exécution du script à ", time.Now())
+	}()
+
 	ticker := time.NewTicker(tickerTime)
 	defer ticker.Stop()
 
@@ -61,20 +69,26 @@ func main() {
 }
 
 func runTask() {
-	// Setup defer to handle any panics and log the script end time
-	defer func() {
-		if r := recover(); r != nil {
-			logger.Error("Une erreur inattendue s'est produite: ", r)
-		}
-		logger.Info("Fin de l'exécution du script à ", time.Now())
-	}()
-
+	logger.Info("Début de l'exécution de la tâche à ", time.Now())
+	
 	// Take a photo
-	picture := capture.Picture(imagePath)
+	var picture string
+	if debug {
+		picture = ""
+	} else {
+		picture = capture.Picture(imagePath)
+	}
 
 	// Get caption
-	caption := caption.Caption(picture, model, apiKey)
+	var spotCaption string
+	if debug {
+		spotCaption = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+	} else {
+		spotCaption = caption.Caption(picture, model, apiKey)
+	}
 
 	// Render
-	render.Render(caption, picture, outputPath)
+	render.Render(spotCaption)
+
+	logger.Info("fin de l'exécution de la tâche à ", time.Now())
 }

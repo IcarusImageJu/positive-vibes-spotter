@@ -77,5 +77,7 @@ func Caption(imageBase64 string, model string, apiKey string) string {
 		logger.Fatal("Erreur lors de l'envoi de la requête: ", err)
 	}
 
-    return ExtractCaption(resp.Body())
+    caption := ExtractCaption(resp.Body())
+    logger.Info("Légende générée: ", caption)
+    return caption
 }
