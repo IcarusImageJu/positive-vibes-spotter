@@ -30,6 +30,10 @@ func Fatal(args ...interface{}) {
 	logger.Fatal(args...)
 }
 
+func Fatalf(format string, args ...interface{}) {
+	logger.Fatalf(format, args...)
+}
+
 // Printf logs a formatted message.
 func Printf(format string, args ...interface{}) {
 	logger.Printf(format, args...)
