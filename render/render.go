@@ -63,7 +63,7 @@ func Render(caption string) error {
 		draw.Draw(img, img.Bounds(), &image.Uniform{color.Black}, image.Point{}, draw.Src)
 
 		// Draw a large white square at the center
-		squareSize := 100
+		squareSize := 300
 		startX := (width - squareSize) / 2
 		startY := (height - squareSize) / 2
 		white := color.RGBA{255, 255, 255, 255}
