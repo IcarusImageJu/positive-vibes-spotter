@@ -18,7 +18,7 @@ var (
 	model     = "gpt-4o"
 	imagePath = "photo.jpg"
 	tickerTime	= 1 * time.Hour
-	debug     = true
+	debug     = false
 )
 
 func init() {
